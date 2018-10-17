@@ -70,6 +70,8 @@ module Airborne
   end
 
   def json_body
+    fail(InvalidJsonError, 'Api request returned invalid response') if response.nil?
+
     JSON.parse(response.body, symbolize_names: true) rescue fail InvalidJsonError, 'Api request returned invalid json'
   end
 
